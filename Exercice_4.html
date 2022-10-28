@@ -1,0 +1,162 @@
+<!Doctype html>
+<html>
+	<head>
+		<meta charset="Utf-8">
+	</head>
+	<body style="background-color:#FFF01F; ">
+		<form>
+			<ol>
+				<li> Senegal est un pays du continent : </li>
+				<ul style="list-style-type: lower-alpha;">
+					<li><input type="radio" value="a" name="q1">Europeen </li>
+					<li><input type="radio" value="b" name="q1">Asiatique</li>
+					<li><input type="radio" value="c" name="q1">Africain</li>
+					<li><input type="radio" value="d" name="q1">Americain</li>
+				</ul>
+				<div class="error_validate">
+					<span id="error_question_one"></span>
+				</div>
+				<li>BOB Marley est ? </li>
+				<ul style="list-style-type: lower-alpha;">
+					<li><input type="radio" value="a" name="q2">Acteur de cinema </li>
+					<li><input type="radio" value="b" name="q2">Musicien</li>
+					<li><input type="radio" value="c" name="q2">Footballeur</li>
+					<li><input type="radio" value="d" name="q2">Ecrivain</li>
+				</ul>
+				<div class="error_validate">
+					<span id="error_question_two"></span>
+				</div>
+				<li>Bombardier est un : ? </li>
+				<ul style="list-style-type: lower-alpha;">
+					<li><input type="radio" value="a" name="q3">Acteur de cinema </li>
+					<li><input type="radio" value="b" name="q3">Footballeur</li>
+					<li><input type="radio" value="c" name="q3">Ingenieur</li>
+					<li><input type="radio" value="d" name="q3">Lutteur</li>
+				</ul>
+				<div class="error_validate">
+					<span id="error_question_three"></span>
+				</div>
+				<li>Bill clinton est le president de la republique du : ? </li>
+				<ul style="list-style-type: lower-alpha;">
+					<li><input type="radio" value="a" name="q4">Senegal</li>
+					<li><input type="radio" value="b" name="q4">Gambie</li>
+					<li><input type="radio" value="c" name="q4">Guinee</li>
+					<li><input type="radio" value="d" name="q4">USA</li>
+				</ul>
+				<div class="error_validate">
+					<span id="error_question_four"></span>
+				</div>
+				<li>Youssou NDOUR est : ? </li>
+				<ul style="list-style-type: lower-alpha;">
+					<li><input type="radio" value="a" name="q5">Un Danseur</li>
+					<li><input type="radio" value="b" name="q5">Un chanteur</li>
+					<li><input type="radio" value="c" name="q5">Un Mecanicien</li>
+					<li><input type="radio" value="d" name="q5">Un Informaticien</li>
+				</ul>
+				<div class="error_validate">
+					<span id="error_question_five"></span>
+				</div>
+			</ol>
+			<button type="button" onclick="result()" id="btnValider">Valider</button>
+		</form>
+		<div class="results">
+			<p>Pourcentage <strong id="counter">0</strong>%</p>
+		</div>
+		<script>
+			var compteur = 0,
+				nbClick = 0,
+				responses = ['c','b' ,'d' , 'd' , 'b'] ,  // les bonnes reponses
+				inputReponses = [] ,     // les reponses saisies
+				nbQuestion = 5;          // Le nombre de question repondue.
+				
+			
+			function result(){
+
+				
+				var question_1 = document.getElementsByName("q1");
+				var question_2 = document.getElementsByName("q2");
+				var question_3 = document.getElementsByName("q3");
+				var question_4 = document.getElementsByName("q4");
+				var question_5 = document.getElementsByName("q5");
+
+				var resultat1 = execute(question_1 , 'error_question_one' , 'Veuillez repondre à la question 1')
+				var resultat2 = execute(question_2 , 'error_question_two' , 'Veuillez repondre à la question 2')
+				var resultat3 = execute(question_3 , 'error_question_three' , 'Veuillez repondre à la question 3')
+				var resultat4 = execute(question_4 , 'error_question_four' , 'Veuillez repondre à la question 4')
+				var resultat5 = execute(question_5 , 'error_question_five' , 'Veuillez repondre à la question 5')
+
+				if (resultat1 && resultat2 && resultat3 && resultat4 && resultat5) {
+					var response_1 = getValueCheckedElement(question_1);
+					var response_2 = getValueCheckedElement(question_2);
+					var response_3 = getValueCheckedElement(question_3);
+					var response_4 = getValueCheckedElement(question_4);
+					var response_5 = getValueCheckedElement(question_5);
+					reponsevalide(response_1 , response_2 , response_3 , response_4 , response_5);
+					AfficherResult();
+				}
+			}
+
+
+			function reponsevalide(response_1 , response_2, response_3 , response_4 , response_5){
+	
+				
+				if (response_1 == responses[0]) {
+					compteur = compteur + calculerPourcentage();
+				}
+				if (response_2 == responses[1]){
+					compteur = compteur + calculerPourcentage();
+				}
+				if (response_3 == responses[2]){
+					compteur = compteur + calculerPourcentage();
+				}
+				if (response_4 == responses[3]){
+					compteur = compteur + calculerPourcentage();
+				}
+				if (response_5 == responses[4]){
+					compteur = compteur + calculerPourcentage();
+				}
+			}
+
+			function VerifierSiInputIsChecked(tab) {
+				let response = false;
+				for (let i = 0; i < tab.length; i++) {
+					const element = tab[i];
+					if (element.checked) response = true;
+				}
+				return response;
+			}
+
+			function execute(questions , errorTag , errorMessage){
+				if (VerifierSiInputIsChecked(questions) == false){
+					MessageErreur(errorTag , errorMessage);
+					return false;
+				} 			
+				document.getElementById(errorTag).innerText='';
+				return true;
+			}
+
+			function MessageErreur(tag , errorMessage){
+				var element = document.getElementById(tag);
+					element.innerText= errorMessage;
+					element.style.color='red';
+			}
+
+			function AfficherResult(){
+				document.getElementById('counter').innerText = compteur;
+			}
+		
+			function getValueCheckedElement(tab){
+				let response ;
+				for (let i = 0; i < tab.length; i++) {
+					const element = tab[i];
+					if (element.checked) response = element.value;
+				}
+				return response;
+			}
+		
+			function calculerPourcentage(){
+				return 100 /  nbQuestion;
+			}
+		</script>
+	</body>
+</html>

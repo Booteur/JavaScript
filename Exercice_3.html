@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exo2</title>
+</head>
+<body>
+    <form action="#">
+        <fieldset>
+            <legend>Consonnes & Voyelles</legend>
+            <div>
+                <label for="">Lettres (20)</label>
+                <input type="text" maxlength="20" style="width: 50%;" id="lettre" placeholder="Saissiez les lettres de l'aphabet">
+                <span id="nbCaractereSaisie">0</span>
+            </div>
+            <div>
+                <button 
+                onclick="onClickCounterVoyelleConsonne()"
+                style="margin-top: 5px;" id="btn" type="button">Afficher les consonnes & voyelles</button>
+            </div>
+        </fieldset>
+    </form>
+    <div class="resultat" style="border: 1px solid;padding: 15px;margin-top: 5px;">
+        <p>Nombre consonne: <strong id="nbConsonne"></strong></p>
+        <p>Nombre voyelle: <strong id="nbVoyelle"></strong></p>
+    </div>
+    <script>
+        // A voir
+        let alphabet = ['a', ' b', ' c', ' d', ' e', ' f', ' g', 
+            ' h', ' i', ' j', ' k', ' l', ' m', ' n', ' o', ' p', 
+            ' q', ' r', ' s', ' t', ' u', ' v', ' w', ' x', ' y', 'z']
+        // tableaux representatif des lettre saisie
+        var lettres = [];
+        // recuperation du champs
+
+        // ajouter un evenement sur le champs
+        var compteurNombreSaisie = 0;
+    
+        function countNbConsonneVoyelle(){
+            var nbVoyelle =0  , nbConsonne = 0;
+            for (let i = 0; i < lettres.length; i++) {
+                const lettre = lettres[i];
+                if (lettre == 'a' || lettre == 'i' ||  lettre == 'u' || lettre == 'e' || lettre == 'o' || lettre == 'y' ) 
+                    nbVoyelle ++;
+                else 
+                    nbConsonne ++;
+            }
+            return [nbVoyelle , nbConsonne];
+        }
+
+        function displayVoyelleConsonne(nbConsonne , nbVoyelle){
+            document.getElementById('nbConsonne').innerText = nbConsonne;
+            document.getElementById('nbVoyelle').innerText = nbVoyelle;
+        }
+        
+        function onClickCounterVoyelleConsonne(){
+            var mot = document.getElementById('lettre').value;
+            if (mot.length == 20){
+                lettres = mot.split('');
+                var resultat = countNbConsonneVoyelle();
+                var nbVoyelle = resultat[0];        
+                var nbConsonne = resultat[1];
+                displayVoyelleConsonne(nbConsonne , nbVoyelle);
+            } else {
+                alert("Veuillez saisir les 20 caracteres s'il vous plait");
+            }
+        }
+    
+    
+    </script>
+</body>
+</html>

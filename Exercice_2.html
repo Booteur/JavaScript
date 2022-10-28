@@ -1,0 +1,117 @@
+<script language="JavaScript">
+
+    function Comparer_petit()
+    {
+        var Nbre1 = +document.getElementById("Nbre1").value ;
+
+        var Nbre2 = +document.getElementById("Nbre2").value ;
+
+        var Nbre3 = +document.getElementById("Nbre3").value ;
+
+        var Tab = [Nbre1,Nbre2,Nbre3]
+
+        var min = Tab[0];
+
+        var result;
+
+        for (var i = 0; i<Tab.length; i++){
+            if(Tab[i] < min){
+                min = Tab[i];
+            }
+        }
+        document.getElementById("result").value =min;
+
+    }
+
+    function Comparer_grand()
+    {
+       var Nbre1 = +document.getElementById("Nbre1").value ;
+
+        var Nbre2 = +document.getElementById("Nbre2").value ;
+
+        var Nbre3 = +document.getElementById("Nbre3").value ;
+
+        
+        var Tab = [Nbre1,Nbre2,Nbre3]
+
+        var result;
+
+        var max = Tab[0];
+
+        for (var i = 0; i<Tab.length; i++){
+            if(Tab[i] > max){
+                max = Tab[i];
+            }
+        }
+       document.getElementById("result").value =max;
+    }
+
+    function Somme()
+    {
+        var Nbre1 = +document.getElementById("Nbre1").value ;
+
+        var Nbre2 = +document.getElementById("Nbre2").value ;
+
+        var Nbre3 = +document.getElementById("Nbre3").value ;
+
+        var result;
+        
+        document.getElementById("result").value =Nbre1+Nbre2+Nbre3;        
+    }
+
+    function Multiplication()
+    {
+        var Nbre1 = +document.getElementById("Nbre1").value ;
+
+        var Nbre2 = +document.getElementById("Nbre2").value ;
+
+        var Nbre3 = +document.getElementById("Nbre3").value ;
+
+        var result;
+
+       document.getElementById("result").value =Nbre1*Nbre2*Nbre3;                  
+    }
+</script>
+
+<html>
+<body>
+<center>
+    <fieldset>
+
+        <h1 style="color:green; text-align: center;">
+            OPERATION ET COMPARAISON
+        </h1>
+
+    <p>LE PREMIER MONBRE
+        <input type="text" id="Nbre1">
+    </p><br>
+
+    <p>LE DEUXIEME NOMBRE
+        <input type="text" id="Nbre2" >
+    </p><br>
+
+    <p>LE TROISIEME NOMBRE
+        <input type="text" id="Nbre3">
+    </p><br>
+
+    <p>
+        SOLUTION OPERATION
+        <input type="text" id="result">
+    </p><br><br>
+
+    <p>
+        <center>
+        <input  type="button" name="Add" value="Comparer" onclick="Comparer_petit()"  ondblclick="Comparer_grand()">
+
+        <input  type="button" name="Add" value="Somme" onclick="Somme()">
+
+        <input  type="button" name="Add" value="Multiplication" onclick="Multiplication()">
+    
+        </center>
+    </p>  
+
+
+    </fieldset><br><br>
+</center>
+</body>
+</html>
